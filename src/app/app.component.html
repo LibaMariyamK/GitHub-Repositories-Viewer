@@ -1,5 +1,146 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
-    Fyle Internship Challenge
+<title>GitHub Repositories viewer</title>
+<header class="header">
+  <div class="title1">
+    <span class="bold">GitHub</span><br>
+    <span class="small">Repositories </span>
   </div>
-</div>
+  
+  <div class="searchBox">
+    <input
+      class="searchInput"
+      type="text"
+      name=""
+      placeholder="Enter Your Username"
+      [(ngModel)]="username"
+      #searchInput
+      (keyup.enter)="searchUser()"
+    />
+    <button class="searchButton" (click)="searchUser()">
+      <i class="material-icons"> search </i>
+    </button>
+  </div>
+</header>
+
+<div class="item main-frame" *ngIf="loading; else content">
+  <div class="full-item">
+    <div class="first-section-wrapper">
+      <div class="gravatar">
+        <ngx-skeleton-loader
+          appearance="circle"
+          [theme]="{ width: '80px', height: '80px' }"
+        >
+        </ngx-skeleton-loader>
+      </div>
+      <div class="gravatar-title">
+        <div>
+          <ngx-skeleton-loader
+            [theme]="{
+              width: '300px',
+              'border-radius': '0',
+              height: '30px',
+              'margin-bottom': '10px'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+        <div>
+          <ngx-skeleton-loader
+            [theme]="{ width: '230px', 'border-radius': '0', height: '25px' }"
+          >
+          </ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+    <div class="second-section-wrapper">
+      <div class="wrapper">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '60%',
+            'border-radius': '0',
+            height: '18px',
+            'margin-bottom': '10px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="wrapper">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '90%',
+            'border-radius': '0',
+            height: '18px',
+            'margin-bottom': '10px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="wrapper">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '70%',
+            'border-radius': '0',
+            height: '18px',
+            'margin-bottom': '10px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="wrapper">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '70%',
+            'border-radius': '0',
+            height: '18px',
+            'margin-bottom': '10px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="wrapper">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '90%',
+            'border-radius': '0',
+            height: '18px',
+            'margin-bottom': '10px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</div> 
+ 
+ <ng-template #content>
+  <div class="main-frame">
+    <div *ngIf="user" class="main-profile">
+      <img class="img" [src]="user.avatar_url" />
+      <div class="textWrapper">
+        <div class="name">{{ user.name ? user.name : user.login }}</div>
+        <div class="bio">{{ user.bio }}</div>
+        <div class="location with-icon" *ngIf="user.location">
+          <mat-icon fontIcon="location_on"> </mat-icon> {{ user.location }}
+        </div>
+        <button class="btn" (click)="pageRedirect(user.html_url)">
+          GitHub
+        </button>
+
+      </div>
+    </div>
+    <div class="repo-frame">
+      <div class="container">
+        <div *ngFor="let repo of dataObs$ | async">
+          <div class="card">
+            <h2 class="title">{{ repo.name }}</h2>
+            <p class="info">{{ repo.description }}</p>
+            <span class="tag" *ngIf="repo.language">{{ repo.language }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template> 
+
+<footer class="footer">
+  <mat-paginator
+    [length]="repositories.length"
+    [pageSizeOptions]="[10, 20, 50,100]"
+    aria-label="Select page"
+    class="paginator"
+  >
+  </mat-paginator>
+</footer>

@@ -1,3 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html,
+body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    box-shadow: 0px 0px 6pxrgba(0, 0, 0, .35);
+    background: rgba(205, 205, 205, 1);
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6115a', endColorstr='#4d1e76', GradientType=1);
+}
