@@ -2,7 +2,7 @@
 
 ## Description
 
-It is an Angular single-page application (SPA)[Ref](https://libamariyamk.github.io/GitHub-Repositories-Viewer/)that allows users to input a GitHub username and displays the public repositories belonging to that user. 
+It is an Angular single-page application (SPA)-[click here ](https://libamariyamk.github.io/GitHub-Repositories-Viewer/)-that allows users to input a GitHub username and displays the public repositories belonging to that user. 
 
 ## Features
 
